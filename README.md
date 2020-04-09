@@ -1,8 +1,10 @@
 # population-trends
 
+![](https://github.com/Mizuki901/population-trends/workflows/CI%20CD/badge.svg)
+
 ## Demo
 
-https://population-trends.web.app/
+<a href="https://population-trends.web.app/" target="_blank">Demo</a>
 
 ## Usage
 
