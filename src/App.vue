@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <md-toolbar>
-      <h3 class="md-title">Population Trends</h3>
-    </md-toolbar>
+    <toolbar></toolbar>
     <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
 
 <script>
+import Toolbar from './components/organisms/Toolbar.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Toolbar
+  }
 }
 </script>
 
