@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <toolbar></toolbar>
-    <img src="./assets/logo.png">
-    <router-view/>
+    <div class="container">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -24,5 +25,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
+}
+
+.container {
+  margin-top: 40px;
 }
 </style>
