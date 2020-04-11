@@ -51,5 +51,6 @@ export default {
 .pref-item {
   margin: 0 auto;
   text-align: left;
+  height: 40px;
 }
 </style>
