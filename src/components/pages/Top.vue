@@ -5,11 +5,11 @@
       <div v-for="prefecture in prefectures" :key="prefecture.prefCode"
         class="pref-item md-layout-item md-xlarge-size-10 md-large-size-15 md-medium-size-15 md-small-size-25 md-xsmall-size-33"
       >
-        <md-checkbox v-model="prefecture.checked">
+        <md-checkbox v-model="prefecture.checked" v-on:change="getPopulation(prefecture)">
           {{ prefecture.prefName }}
         </md-checkbox>
       </div>
-      <!-- adjust number of pref-items to multiples of 3 -->
+      <!-- 2or3列の倍数のグリッドで表示できるようにレイアウト調整 -->
       <div class="pref-item md-layout-item md-xlarge-size-10 md-large-size-15 md-medium-size-15 md-small-size-25 md-xsmall-size-33"></div>
     </div>
     <h1>都道府県別人口推移</h1>
@@ -42,30 +42,8 @@ export default {
     return {
       prefectures: [],
       populationTrends: {
-        labels: ['1990', '1995', '2000'],
-        datasets: [
-          {
-            backgroundColor: 'rgba(255,0,0,0.1)',
-            borderColor: 'rgba(255,0,0)',
-            borderWidth: 2,
-            data: [5, 4, 6],
-            label: '北海道'
-          },
-          {
-            backgroundColor: 'rgba(0,255,0,0.1)',
-            borderColor: 'rgba(0,255,0)',
-            borderWidth: 2,
-            data: [4, 1, 3],
-            label: '青森県'
-          },
-          {
-            backgroundColor: 'rgba(0,0,255,0.1)',
-            borderColor: 'rgba(0,0,255)',
-            borderWidth: 2,
-            data: [2, 3, 1],
-            label: '岩手県'
-          }
-        ]
+        labels: ['1970', '1975', '1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2020'],
+        datasets: []
       }
     }
   },
@@ -73,10 +51,31 @@ export default {
     axiosWrapper.get('https://opendata.resas-portal.go.jp/api/v1/prefectures')
       .then((res) => {
         this.prefectures = res.data.result
-        this.prefectures.forEach((prefecture) => {
-        })
-        console.log(this.prefectures)
       })
+  },
+  methods: {
+    getPopulation: function (prefecture) {
+      const url = 'https://opendata.resas-portal.go.jp/api/v1/population/sum/estimate?prefCode=' + prefecture.prefCode + '&cityCode=-'
+      axiosWrapper.get(url)
+        .then((res) => {
+          // 都道府県の総人口以外のデータは不要
+          // 1970年から2020年までのデータに整形
+          let populationByYear = res.data.result.data.filter(data => data.label === '総人口')[0].data.slice(2, 13)
+          const population = populationByYear.map((data) => {
+            return data.value
+          })
+
+          // グラフに描画する都道府県を追加
+          const dataset = {
+            backgroundColor: 'rgba(0,0,255,0.1)',
+            borderColor: 'rgba(0,0,255)',
+            borderWidth: 2,
+            data: population,
+            label: prefecture.prefName
+          }
+          this.populationTrends.datasets.push(dataset)
+        })
+    }
   }
 }
 </script>
