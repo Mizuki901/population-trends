@@ -28,6 +28,11 @@ export default {
 }
 
 .container {
-  margin-top: 40px;
+  max-width: 1000px;
+  margin: 40px auto 0 auto;
+}
+
+h1, h2 {
+  font-weight: normal;
 }
 </style>
