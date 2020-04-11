@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import Toolbar from '@/components/organisms/Toolbar'
+import Toolbar from '@/components/common/Toolbar'
 
 describe('Toolbar.vue', () => {
     it('titleが設定されていること', () => {
