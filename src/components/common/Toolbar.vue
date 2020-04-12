@@ -1,6 +1,13 @@
 <template>
   <md-toolbar class="toolbar">
-    <h3 class="md-title title">都道府県別人口推移</h3>
+    <h3 class="md-title title" style="flex: 1">都道府県別人口推移</h3>
+    <md-button class="md-icon-button">
+      <a href="https://github.com/Mizuki901/population-trends">
+        <md-icon>
+            <i class="fab fa-github"></i>
+        </md-icon>
+      </a>
+    </md-button>
   </md-toolbar>
 </template>
 
@@ -12,6 +19,9 @@ export default {
 
 <style scoped>
   .title {
-      margin: 0 auto;
+      text-align: left;
+  }
+  .md-icon-button a:link {
+    text-decoration: none;
   }
 </style>>
