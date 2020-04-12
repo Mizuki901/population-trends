@@ -1,10 +1,14 @@
-# population-trends
+# population-trends ![](https://github.com/Mizuki901/population-trends/workflows/CI%20CD/badge.svg)
 
-![](https://github.com/Mizuki901/population-trends/workflows/CI%20CD/badge.svg)
+## 概要
+
+* [RESAS API](https://opendata.resas-portal.go.jp/)（地域経済分析システム）から「都道府県一覧」を取得し、チェックボックスとあわせてブラウザに表示
+* 任意の都道府県にチェックを入れると、RESAS APIから選択された都道府県の年別総人口を取得
+* 取得した年別総人口を、X軸:年・Y軸:人口数の折れ線グラフを動的に生成して表示
 
 ## Demo
 
-<a href="https://population-trends.web.app/" target="_blank">Demo</a>
+* <a href="https://population-trends.web.app/" target="_blank">Demo</a>
 
 ## Usage
 
