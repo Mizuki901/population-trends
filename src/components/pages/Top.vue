@@ -1,6 +1,7 @@
 <template>
   <div class="top">
-    <div class="pref-items md-layout md-gutter">
+    <md-progress-spinner v-if="isloading" class="md-accent" md-mode="indeterminate"></md-progress-spinner>
+    <div v-if="!isloading" class="pref-items md-layout md-gutter">
       <div v-for="prefecture in prefectures" :key="prefecture.prefCode"
         class="pref-item md-layout-item md-xlarge-size-10 md-large-size-15 md-medium-size-15 md-small-size-25 md-xsmall-size-33"
       >
@@ -40,6 +41,7 @@ export default {
   },
   data () {
     return {
+      isloading: true,
       prefectures: [],
       populationTrends: {
         labels: ['1970', '1975', '1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2020'],
@@ -50,6 +52,7 @@ export default {
   mounted () {
     axiosWrapper.get('https://opendata.resas-portal.go.jp/api/v1/prefectures')
       .then((res) => {
+        this.isloading = false
         this.prefectures = res.data.result
       })
   },
@@ -109,6 +112,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.md-progress-spinner {
+  margin: 24px;
+}
 .pref-items {
   margin: 10px 0 60px 0px;
 }
