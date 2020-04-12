@@ -1,6 +1,6 @@
 <template>
   <md-toolbar class="toolbar">
-    <h3 class="md-title title">Population Trends</h3>
+    <h3 class="md-title title">都道府県別人口推移</h3>
   </md-toolbar>
 </template>
 

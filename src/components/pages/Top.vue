@@ -1,6 +1,5 @@
 <template>
   <div class="top">
-    <h1>都道府県別人口推移</h1>
     <div class="pref-items md-layout md-gutter">
       <div v-for="prefecture in prefectures" :key="prefecture.prefCode"
         class="pref-item md-layout-item md-xlarge-size-10 md-large-size-15 md-medium-size-15 md-small-size-25 md-xsmall-size-33"
@@ -110,10 +109,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1 {
-  margin-bottom: 20px;
-}
-
 .pref-items {
   margin: 10px 0 60px 0px;
 }

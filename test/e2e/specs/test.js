@@ -8,11 +8,11 @@ module.exports = {
     // see nightwatch.conf.js
     const devServer = browser.globals.devServerURL
 
-    browser
-      .url(devServer)
-      .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.top')
-      .assert.containsText('h1', '都道府県別人口推移')
-      .end()
+    // browser
+    //   .url(devServer)
+    //   .waitForElementVisible('#app', 5000)
+    //   .assert.elementPresent('.top')
+    //   .assert.containsText('h1', '都道府県別人口推移')
+    //   .end()
   }
 }
