@@ -1,6 +1,6 @@
 <template>
   <div class="top">
-    <h1>都道府県一覧</h1>
+    <h1>都道府県別人口推移</h1>
     <div class="pref-items md-layout md-gutter">
       <div v-for="prefecture in prefectures" :key="prefecture.prefCode"
         class="pref-item md-layout-item md-xlarge-size-10 md-large-size-15 md-medium-size-15 md-small-size-25 md-xsmall-size-33"
@@ -12,7 +12,6 @@
       <!-- 2or3列の倍数のグリッドで表示できるようにレイアウト調整 -->
       <div class="pref-item md-layout-item md-xlarge-size-10 md-large-size-15 md-medium-size-15 md-small-size-25 md-xsmall-size-33"></div>
     </div>
-    <h1>都道府県別人口推移</h1>
     <vue-chart class="chart"
       style="width: 90%; height: 600px;"
       :data="populationTrends"
@@ -26,6 +25,8 @@
 <script>
 import axios from 'axios'
 import VueChart from '@seregpie/vue-chart'
+import Color from 'color'
+import RandomColor from 'randomcolor'
 
 const axiosWrapper = axios.create({
   headers: {
@@ -77,11 +78,19 @@ export default {
               return data.value
             })
 
+            // グラフの色をランダムに生成する
+            const randomColor = RandomColor({
+              luminosity: 'bright',
+              hue: 'random',
+              format: 'rgb'
+            })
+            const alphaRandomColor = Color(randomColor).alpha(0.1).string()
+
             // グラフに描画する都道府県を追加
             const dataset = {
               id: prefecture.prefCode,
-              backgroundColor: 'rgba(0,0,255,0.1)',
-              borderColor: 'rgba(0,0,255)',
+              backgroundColor: alphaRandomColor,
+              borderColor: randomColor,
               borderWidth: 2,
               data: population,
               label: prefecture.prefName
@@ -101,6 +110,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+h1 {
+  margin-bottom: 20px;
+}
+
 .pref-items {
   margin: 10px 0 60px 0px;
 }
