@@ -25,6 +25,10 @@
       :update-config="{duration: 0, easing: 'easeOutBounce'}"
       type="line"
     />
+    <md-snackbar :md-position="center" :md-duration="4000" :md-active.sync="isFalledGetPoplationData" md-persistent>
+      <span>ネットワークエラー：人口データを取得できませんでした
+      </span>
+    </md-snackbar>
   </div>
 </template>
 
@@ -49,7 +53,7 @@ export default {
     return {
       isLoading: true,
       isFalledGetPrefsData: false,
-      // isFalledGetPoplationData: false,
+      isFalledGetPoplationData: false,
       prefectures: [],
       populationTrends: {
         labels: ['1970', '1975', '1980', '1985', '1990', '1995', '2000', '2005', '2010', '2015', '2020'],
@@ -115,6 +119,16 @@ export default {
             this.populationTrends.datasets.sort(function (data1, data2) {
               return data1.id - data2.id
             })
+          }).catch((err) => {
+            console.log(err)
+            // チェックボックスの選択を外しておく
+            this.prefectures.forEach((data) => {
+              if (data.prefCode === prefecture.prefCode) {
+                data.isChecked = false
+              }
+            })
+            // エラー用のsnackbarを表示
+            this.isFalledGetPoplationData = true
           })
       }
     }
